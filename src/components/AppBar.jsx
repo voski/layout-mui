@@ -30,6 +30,14 @@ function NavAppBar() {
           <Button 
             color="inherit" 
             component={Link} 
+            to="/services"
+            variant={location.pathname === '/services' ? 'outlined' : 'text'}
+          >
+            Services
+          </Button>
+          <Button 
+            color="inherit" 
+            component={Link} 
             to="/login"
             variant={location.pathname === '/login' ? 'outlined' : 'text'}
           >
