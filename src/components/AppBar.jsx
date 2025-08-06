@@ -27,6 +27,14 @@ function NavAppBar() {
           >
             About
           </Button>
+          <Button 
+            color="inherit" 
+            component={Link} 
+            to="/login"
+            variant={location.pathname === '/login' ? 'outlined' : 'text'}
+          >
+            Login
+          </Button>
         </Box>
       </Toolbar>
     </AppBar>
