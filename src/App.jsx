@@ -6,6 +6,7 @@ import Home from './pages/Home'
 import About from './pages/About'
 import Services from './pages/Services'
 import Dashboard from './pages/Dashboard'
+import Docs from './pages/Docs'
 import Login from './pages/Login'
 
 function App() {
@@ -20,6 +21,7 @@ function App() {
             <Route path="/about" element={<About />} />
             <Route path="/services" element={<Services />} />
             <Route path="/dashboard" element={<Dashboard />} />
+            <Route path="/docs" element={<Docs />} />
             <Route path="/login" element={<Login />} />
           </Routes>
         </Box>

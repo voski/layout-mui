@@ -46,6 +46,14 @@ function NavAppBar() {
           <Button 
             color="inherit" 
             component={Link} 
+            to="/docs"
+            variant={location.pathname === '/docs' ? 'outlined' : 'text'}
+          >
+            Docs
+          </Button>
+          <Button 
+            color="inherit" 
+            component={Link} 
             to="/login"
             variant={location.pathname === '/login' ? 'outlined' : 'text'}
           >
