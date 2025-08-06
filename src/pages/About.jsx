@@ -1,12 +1,17 @@
 import { Container, Typography, Paper, Box } from '@mui/material'
+import PageHeader from '../components/PageHeader'
 
 function About() {
+  const breadcrumbs = [
+    { label: 'MUI Layout', href: '/' },
+    { label: 'About' }
+  ]
+
   return (
-    <Container maxWidth="md" sx={{ mt: 4 }}>
-      <Paper elevation={2} sx={{ p: 4 }}>
-        <Typography variant="h2" component="h1" gutterBottom>
-          About
-        </Typography>
+    <>
+      <PageHeader breadcrumbs={breadcrumbs} title="About" />
+      <Container maxWidth="md">
+        <Paper elevation={2} sx={{ p: 4 }}>
         <Box sx={{ mt: 2 }}>
           <Typography variant="body1" paragraph>
             This is an experimental React application built with Material-UI v7 
@@ -19,8 +24,9 @@ function About() {
             with Material-UI's component system.
           </Typography>
         </Box>
-      </Paper>
-    </Container>
+        </Paper>
+      </Container>
+    </>
   )
 }
 
