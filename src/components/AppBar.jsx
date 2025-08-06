@@ -5,7 +5,7 @@ function NavAppBar() {
   const location = useLocation()
 
   return (
-    <AppBar position="static">
+    <AppBar position="fixed">
       <Toolbar>
         <Typography variant="h6" component="div" sx={{ flexGrow: 1 }}>
           MUI Layout
