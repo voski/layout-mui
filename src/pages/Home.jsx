@@ -1,15 +1,28 @@
-import { Container, Card, CardContent, Grid, Typography } from '@mui/material'
+import { Container, Card, CardContent, Grid, Typography, Button } from '@mui/material'
+import { useState } from 'react'
 import PageHeader from '../components/PageHeader'
 
 function Home() {
+  const [count, setCount] = useState(0)
+  
   const breadcrumbs = [
     { label: 'MUI Layout', href: '/' },
     { label: 'Home' }
   ]
 
+  const handleClick = () => {
+    setCount(count + 1)
+  }
+
+  const rightElement = (
+    <Button variant="contained" onClick={handleClick}>
+      Click ({count})
+    </Button>
+  )
+
   return (
     <>
-      <PageHeader breadcrumbs={breadcrumbs} title="Home" />
+      <PageHeader breadcrumbs={breadcrumbs} title="Home" rightElement={rightElement} />
       <Container maxWidth="lg">
 
         <Grid container spacing={3} sx={{ mt: 2 }}>
