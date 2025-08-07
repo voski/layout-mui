@@ -102,18 +102,47 @@ function Docs() {
                   </Box>
                   <Typography variant="body2" paragraph>
                     Page-level header with breadcrumb navigation and page title. 
-                    Uses primary.light background for visual separation.
+                    Supports optional right-side elements (buttons, toggles) and bottom elements (tabs, navigation).
+                    Uses subtle border for clean visual separation.
                   </Typography>
                   <Box sx={{ mb: 2 }}>
                     <Chip label="Breadcrumbs" size="small" sx={{ mr: 1 }} />
-                    <Chip label="Themed Background" size="small" />
+                    <Chip label="Right Elements" size="small" sx={{ mr: 1 }} />
+                    <Chip label="Bottom Elements" size="small" />
                   </Box>
-                  {codeExample(`<PageHeader 
+                  {codeExample(`// Basic PageHeader
+<PageHeader 
   breadcrumbs={[
     { label: 'Home', href: '/' },
     { label: 'Current Page' }
   ]} 
   title="Page Title" 
+/>
+
+// With right-side elements
+const rightElement = (
+  <Button variant="contained">Action</Button>
+)
+
+<PageHeader 
+  breadcrumbs={breadcrumbs} 
+  title="Page Title"
+  rightElement={rightElement}
+/>
+
+// With bottom elements (tabs)
+const bottomElement = (
+  <Tabs value={tabValue} onChange={handleTabChange}>
+    <Tab label="Tab 1" />
+    <Tab label="Tab 2" />
+  </Tabs>
+)
+
+<PageHeader 
+  breadcrumbs={breadcrumbs} 
+  title="Page Title"
+  rightElement={rightElement}
+  bottomElement={bottomElement}
 />`)}
                 </CardContent>
               </Card>
@@ -534,7 +563,7 @@ createRoot(document.getElementById('root')).render(
                 For pages that need breadcrumbs and titles (marketing pages, content pages):
               </Typography>
               {codeExample(`import PageHeader from '../components/PageHeader'
-import { Container } from '@mui/material'
+import { Container, Button, Tabs, Tab } from '@mui/material'
 
 function YourPage() {
   const breadcrumbs = [
@@ -542,9 +571,27 @@ function YourPage() {
     { label: 'Current Page' }
   ]
 
+  // Optional: Add right-side elements
+  const rightElement = (
+    <Button variant="contained">Action</Button>
+  )
+
+  // Optional: Add bottom elements
+  const bottomElement = (
+    <Tabs value={tabValue} onChange={handleTabChange}>
+      <Tab label="Tab 1" />
+      <Tab label="Tab 2" />
+    </Tabs>
+  )
+
   return (
     <>
-      <PageHeader breadcrumbs={breadcrumbs} title="Page Title" />
+      <PageHeader 
+        breadcrumbs={breadcrumbs} 
+        title="Page Title"
+        rightElement={rightElement}    // Optional
+        bottomElement={bottomElement}  // Optional
+      />
       <Container maxWidth="lg" sx={{ py: 4 }}>
         {/* Your existing page content */}
       </Container>

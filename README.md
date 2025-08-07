@@ -19,7 +19,7 @@ The built-in documentation includes:
 ## ✨ Features
 
 - **Fixed Navigation Bar** - Sticky AppBar that stays visible during scrolling with active page highlighting
-- **Breadcrumb Navigation** - Contextual page headers with clickable breadcrumb trails  
+- **Flexible Page Headers** - Breadcrumb navigation with support for custom right-side and bottom elements  
 - **Sticky Footer** - Footer that stays at bottom of viewport using flexbox layout
 - **Multiple Layout Patterns** - Standard content pages, centered forms, and two-pane dashboards
 - **Responsive Design** - Mobile-friendly layouts using MUI's responsive system
@@ -52,7 +52,7 @@ src/
 ├── components/
 │   ├── AppBar.jsx          # Fixed navigation with active states
 │   ├── Footer.jsx          # Sticky footer component
-│   └── PageHeader.jsx      # Breadcrumb navigation and titles
+│   └── PageHeader.jsx      # Breadcrumb navigation with optional right/bottom elements
 ├── pages/
 │   ├── Home.jsx            # Card grid layout
 │   ├── About.jsx           # Text content layout
@@ -132,6 +132,31 @@ Want to use these patterns in your existing project? Check out the [complete mig
     {/* Page content */}
   </Container>
 </>
+```
+
+### PageHeader with Custom Elements
+```jsx
+// Right-side elements (buttons, toggles, etc.)
+const rightElement = (
+  <Button variant="contained" onClick={handleAction}>
+    Action
+  </Button>
+)
+
+// Bottom elements (tabs, navigation, etc.)
+const bottomElement = (
+  <Tabs value={tabValue} onChange={handleTabChange}>
+    <Tab label="Tab 1" />
+    <Tab label="Tab 2" />
+  </Tabs>
+)
+
+<PageHeader 
+  breadcrumbs={breadcrumbs} 
+  title="Page Title"
+  rightElement={rightElement}    // Optional
+  bottomElement={bottomElement}  // Optional
+/>
 ```
 
 ### Two-Pane Layout Pattern
