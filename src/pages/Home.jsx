@@ -1,9 +1,10 @@
-import { Container, Card, CardContent, Grid, Typography, Button } from '@mui/material'
+import { Container, Card, CardContent, Grid, Typography, Button, Box, Switch, FormControlLabel } from '@mui/material'
 import { useState } from 'react'
 import PageHeader from '../components/PageHeader'
 
 function Home() {
   const [count, setCount] = useState(0)
+  const [switchOn, setSwitchOn] = useState(false)
   
   const breadcrumbs = [
     { label: 'MUI Layout', href: '/' },
@@ -14,10 +15,21 @@ function Home() {
     setCount(count + 1)
   }
 
+  const handleSwitchChange = (event) => {
+    setSwitchOn(event.target.checked)
+  }
+
   const rightElement = (
-    <Button variant="contained" onClick={handleClick}>
-      Click ({count})
-    </Button>
+    <Box sx={{ display: 'flex', flexDirection: 'column', alignItems: 'flex-end', gap: 1 }}>
+      <Button variant="contained" onClick={handleClick}>
+        Click ({count})
+      </Button>
+      <FormControlLabel
+        control={<Switch checked={switchOn} onChange={handleSwitchChange} />}
+        label="Toggle"
+        labelPlacement="start"
+      />
+    </Box>
   )
 
   return (
