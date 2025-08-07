@@ -3,7 +3,7 @@ import { Link as RouterLink } from 'react-router-dom'
 
 function PageHeader({ breadcrumbs, title }) {
   return (
-    <Box sx={{ py: 3, px: 3, bgcolor: "primary.light" }}>
+    <Box sx={{ py: 3, px: 3, borderBottom: 1, borderColor: 'divider' }}>
       <Breadcrumbs aria-label="breadcrumb" sx={{ mb: 1 }}>
         {breadcrumbs.map((crumb, index) => {
           if (crumb.href && index < breadcrumbs.length - 1) {
