@@ -1,7 +1,7 @@
 import { Box, Breadcrumbs, Typography, Link } from '@mui/material'
 import { Link as RouterLink } from 'react-router-dom'
 
-function PageHeader({ breadcrumbs, title, rightElement }) {
+function PageHeader({ breadcrumbs, title, rightElement, bottomElement }) {
   return (
     <Box sx={{ py: 3, px: 3, borderBottom: 1, borderColor: 'divider' }}>
       <Breadcrumbs aria-label="breadcrumb" sx={{ mb: 1 }}>
@@ -37,6 +37,11 @@ function PageHeader({ breadcrumbs, title, rightElement }) {
           </Box>
         )}
       </Box>
+      {bottomElement && (
+        <Box sx={{ mt: 2 }}>
+          {bottomElement}
+        </Box>
+      )}
     </Box>
   )
 }

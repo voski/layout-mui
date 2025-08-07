@@ -1,10 +1,11 @@
-import { Container, Card, CardContent, Grid, Typography, Button, Box, Switch, FormControlLabel } from '@mui/material'
+import { Container, Card, CardContent, Grid, Typography, Button, Box, Switch, FormControlLabel, Tabs, Tab } from '@mui/material'
 import { useState } from 'react'
 import PageHeader from '../components/PageHeader'
 
 function Home() {
   const [count, setCount] = useState(0)
   const [switchOn, setSwitchOn] = useState(false)
+  const [tabValue, setTabValue] = useState(0)
   
   const breadcrumbs = [
     { label: 'MUI Layout', href: '/' },
@@ -17,6 +18,10 @@ function Home() {
 
   const handleSwitchChange = (event) => {
     setSwitchOn(event.target.checked)
+  }
+
+  const handleTabChange = (event, newValue) => {
+    setTabValue(newValue)
   }
 
   const rightElement = (
@@ -32,9 +37,16 @@ function Home() {
     </Box>
   )
 
+  const bottomElement = (
+    <Tabs value={tabValue} onChange={handleTabChange}>
+      <Tab label="Foo" />
+      <Tab label="Bar" />
+    </Tabs>
+  )
+
   return (
     <>
-      <PageHeader breadcrumbs={breadcrumbs} title="Home" rightElement={rightElement} />
+      <PageHeader breadcrumbs={breadcrumbs} title="Home" rightElement={rightElement} bottomElement={bottomElement} />
       <Container maxWidth="lg">
 
         <Grid container spacing={3} sx={{ mt: 2 }}>

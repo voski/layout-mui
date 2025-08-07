@@ -27,7 +27,7 @@ This is a React SPA demonstrating modern layout patterns using Material-UI (MUI)
 **Core Components**:
 - `AppBar.jsx` - Fixed navigation bar with active page highlighting using React Router location
 - `Footer.jsx` - Sticky footer component
-- `PageHeader.jsx` - Breadcrumb navigation and page titles with optional right-side elements
+- `PageHeader.jsx` - Breadcrumb navigation and page titles with optional right-side and bottom elements
 
 **Page Layout Patterns**:
 - **Standard Content** (Home, About, Services) - Container with PageHeader and responsive content
@@ -69,6 +69,8 @@ src/
 **Responsive Design**: Container maxWidth and MUI breakpoints, mobile-friendly navigation
 
 **PageHeader with Right Elements**: Pages can pass a `rightElement` prop to display buttons, toggles, or other controls on the right side of the header
+
+**PageHeader with Bottom Elements**: Pages can pass a `bottomElement` prop to display tabs, navigation, or other controls below the title area
 
 **Height Calculations**:
 - Login centering: `calc(100vh - 128px)` (accounts for AppBar + Footer)  
