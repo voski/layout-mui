@@ -11,7 +11,7 @@ import Login from './pages/Login'
 
 function App() {
   return (
-    <Router>
+    <Router basename="/layout-mui">
       <Box sx={{ display: 'flex', flexDirection: 'column', minHeight: '100vh' }}>
         <NavAppBar />
         <Toolbar />
