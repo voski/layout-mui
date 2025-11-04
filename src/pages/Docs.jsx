@@ -1,3 +1,4 @@
+import { useState } from 'react'
 import {
   Container,
   Typography,
@@ -23,14 +24,41 @@ import {
   ViewColumn,
   Login,
   Home,
-  Article
+  Article,
+  FilterAlt
 } from '@mui/icons-material'
 import PageHeader from '../components/PageHeader'
+import ChipSelect from '../components/ChipSelect'
 
 function Docs() {
   const breadcrumbs = [
     { label: 'MUI Layout', href: '/' },
     { label: 'Documentation' }
+  ]
+
+  // ChipSelect demo state
+  const [category, setCategory] = useState('design')
+  const [status, setStatus] = useState('active')
+  const [priority, setPriority] = useState('high')
+
+  const categoryOptions = [
+    { value: 'design', label: 'Design' },
+    { value: 'development', label: 'Development' },
+    { value: 'marketing', label: 'Marketing' }
+  ]
+
+  const statusOptions = [
+    { value: 'active', label: 'Active' },
+    { value: 'pending', label: 'Pending' },
+    { value: 'completed', label: 'Completed' },
+    { value: 'archived', label: 'Archived' }
+  ]
+
+  const priorityOptions = [
+    { value: 'low', label: 'Low Priority' },
+    { value: 'medium', label: 'Medium Priority' },
+    { value: 'high', label: 'High Priority' },
+    { value: 'urgent', label: 'Urgent' }
   ]
 
   const codeExample = (code) => (
@@ -425,6 +453,242 @@ const bottomElement = (
             </Accordion>
 
           </Box>
+        </Box>
+
+        <Divider sx={{ my: 4 }} />
+
+        {/* Interactive Components */}
+        <Box id="interactive-components" sx={{ mb: 6 }}>
+          <Typography variant="h4" component="h2" gutterBottom>
+            Interactive Components
+          </Typography>
+
+          <Typography variant="body1" paragraph>
+            Custom interactive components that combine MUI primitives for specific use cases.
+          </Typography>
+
+          <Card sx={{ mb: 3 }}>
+            <CardContent>
+              <Box sx={{ display: 'flex', alignItems: 'center', mb: 2 }}>
+                <FilterAlt sx={{ mr: 1 }} />
+                <Typography variant="h6">ChipSelect Component</Typography>
+              </Box>
+
+              <Typography variant="body2" paragraph>
+                A clickable chip that opens a dropdown menu for single-selection.
+                Combines the visual simplicity of a Chip with the functionality of a Select.
+                Perfect for filters, category selectors, and compact selection controls.
+              </Typography>
+
+              <Box sx={{ mb: 2 }}>
+                <Chip label="Chip + Menu" size="small" sx={{ mr: 1 }} />
+                <Chip label="Single Select" size="small" sx={{ mr: 1 }} />
+                <Chip label="Position Indicator" size="small" sx={{ mr: 1 }} />
+                <Chip label="Custom Icons" size="small" />
+              </Box>
+
+              <Alert severity="info" sx={{ mb: 3 }}>
+                The ChipSelect component shows the currently selected value, optional position indicator
+                (e.g., &quot;(1/3)&quot;), and includes visual feedback when open.
+              </Alert>
+
+              {/* Live Demo */}
+              <Paper sx={{ p: 3, bgcolor: 'grey.50', mb: 3 }}>
+                <Typography variant="subtitle2" gutterBottom>
+                  Live Demo - Try clicking these:
+                </Typography>
+                <Box sx={{ display: 'flex', gap: 2, flexWrap: 'wrap', mt: 2 }}>
+                  <ChipSelect
+                    options={categoryOptions}
+                    value={category}
+                    onChange={setCategory}
+                    label="Category"
+                  />
+                  <ChipSelect
+                    options={statusOptions}
+                    value={status}
+                    onChange={setStatus}
+                    showPosition
+                  />
+                  <ChipSelect
+                    options={priorityOptions}
+                    value={priority}
+                    onChange={setPriority}
+                    showPosition
+                    size="small"
+                  />
+                </Box>
+                <Typography variant="caption" color="text.secondary" sx={{ mt: 2, display: 'block' }}>
+                  Selected: Category={category}, Status={status}, Priority={priority}
+                </Typography>
+              </Paper>
+
+              {/* Features */}
+              <Typography variant="subtitle2" gutterBottom>
+                Key Features:
+              </Typography>
+              <List dense sx={{ mb: 2 }}>
+                <ListItem>
+                  <ListItemText
+                    primary="Custom left icon (default: AltRoute)"
+                    secondary="Pass any icon via the icon prop"
+                  />
+                </ListItem>
+                <ListItem>
+                  <ListItemText
+                    primary="Dropdown chevron with rotation animation"
+                    secondary="Visual indicator that rotates when menu opens"
+                  />
+                </ListItem>
+                <ListItem>
+                  <ListItemText
+                    primary="Optional position indicator"
+                    secondary="Show (1/3) style prefix with showPosition prop"
+                  />
+                </ListItem>
+                <ListItem>
+                  <ListItemText
+                    primary="Visual state changes"
+                    secondary="Color and elevation changes when menu is open"
+                  />
+                </ListItem>
+                <ListItem>
+                  <ListItemText
+                    primary="Keyboard accessible"
+                    secondary="Full keyboard navigation via MUI Menu component"
+                  />
+                </ListItem>
+              </List>
+
+              {/* Basic Usage */}
+              <Typography variant="subtitle2" gutterBottom sx={{ mt: 3 }}>
+                Basic Usage:
+              </Typography>
+              {codeExample(`import { useState } from 'react'
+import ChipSelect from '../components/ChipSelect'
+
+function MyComponent() {
+  const [value, setValue] = useState('option1')
+
+  const options = [
+    { value: 'option1', label: 'Option 1' },
+    { value: 'option2', label: 'Option 2' },
+    { value: 'option3', label: 'Option 3' }
+  ]
+
+  return (
+    <ChipSelect
+      options={options}
+      value={value}
+      onChange={setValue}
+      label="Select Option"
+    />
+  )
+}`)}
+
+              {/* With Position Indicator */}
+              <Typography variant="subtitle2" gutterBottom sx={{ mt: 3 }}>
+                With Position Indicator:
+              </Typography>
+              {codeExample(`<ChipSelect
+  options={statusOptions}
+  value={status}
+  onChange={setStatus}
+  showPosition  // Shows "(1/4) Active"
+/>`)}
+
+              {/* Custom Icon and Size */}
+              <Typography variant="subtitle2" gutterBottom sx={{ mt: 3 }}>
+                Custom Icon and Size:
+              </Typography>
+              {codeExample(`import { Category } from '@mui/icons-material'
+
+<ChipSelect
+  options={options}
+  value={value}
+  onChange={setValue}
+  icon={<Category />}  // Custom left icon
+  size="small"         // small | medium
+  label="Categories"
+/>`)}
+
+              {/* Props */}
+              <Typography variant="subtitle2" gutterBottom sx={{ mt: 3 }}>
+                Props:
+              </Typography>
+              <List dense>
+                <ListItem>
+                  <ListItemText
+                    primary={<code>options</code>}
+                    secondary="Array of {value, label} objects (required)"
+                  />
+                </ListItem>
+                <ListItem>
+                  <ListItemText
+                    primary={<code>value</code>}
+                    secondary="Currently selected value (required)"
+                  />
+                </ListItem>
+                <ListItem>
+                  <ListItemText
+                    primary={<code>onChange</code>}
+                    secondary="Callback function (newValue) => void (required)"
+                  />
+                </ListItem>
+                <ListItem>
+                  <ListItemText
+                    primary={<code>showPosition</code>}
+                    secondary="Boolean - show (1/3) indicator (default: false)"
+                  />
+                </ListItem>
+                <ListItem>
+                  <ListItemText
+                    primary={<code>label</code>}
+                    secondary="Static label shown when no selection (default: 'Select')"
+                  />
+                </ListItem>
+                <ListItem>
+                  <ListItemText
+                    primary={<code>icon</code>}
+                    secondary="Left icon element (default: <AltRoute />)"
+                  />
+                </ListItem>
+                <ListItem>
+                  <ListItemText
+                    primary={<code>size</code>}
+                    secondary="'small' | 'medium' (default: 'medium')"
+                  />
+                </ListItem>
+              </List>
+
+              {/* Use Cases */}
+              <Typography variant="subtitle2" gutterBottom sx={{ mt: 3 }}>
+                Common Use Cases:
+              </Typography>
+              <List dense>
+                <ListItem>
+                  <ListItemIcon><FilterAlt fontSize="small" /></ListItemIcon>
+                  <ListItemText primary="Filter controls in dashboards and data tables" />
+                </ListItem>
+                <ListItem>
+                  <ListItemIcon><FilterAlt fontSize="small" /></ListItemIcon>
+                  <ListItemText primary="Category/tag selectors in content management" />
+                </ListItem>
+                <ListItem>
+                  <ListItemIcon><FilterAlt fontSize="small" /></ListItemIcon>
+                  <ListItemText primary="Status toggles in project management" />
+                </ListItem>
+                <ListItem>
+                  <ListItemIcon><FilterAlt fontSize="small" /></ListItemIcon>
+                  <ListItemText primary="Compact selection controls in toolbars" />
+                </ListItem>
+                <ListItem>
+                  <ListItemIcon><FilterAlt fontSize="small" /></ListItemIcon>
+                  <ListItemText primary="PageHeader right elements for view controls" />
+                </ListItem>
+              </List>
+            </CardContent>
+          </Card>
         </Box>
 
         <Divider sx={{ my: 4 }} />
