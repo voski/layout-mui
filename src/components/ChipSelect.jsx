@@ -28,6 +28,9 @@ function ChipSelect({
     handleClose()
   }
 
+  // Check if there's only one option (not clickable in this case)
+  const isSingleOption = options.length <= 1
+
   // Find current selection
   const selectedIndex = options.findIndex(opt => opt.value === value)
   const selectedOption = options[selectedIndex]
@@ -38,7 +41,8 @@ function ChipSelect({
       return label
     }
 
-    if (showPosition) {
+    // Only show position if multiple options AND showPosition=true
+    if (showPosition && !isSingleOption) {
       return `(${selectedIndex + 1}/${options.length}) ${selectedOption.label}`
     }
 
@@ -54,24 +58,26 @@ function ChipSelect({
         label={
           <Box sx={{ display: 'flex', alignItems: 'center', gap: 0.5 }}>
             <span>{chipLabel}</span>
-            <ExpandMore
-              fontSize="small"
-              sx={{
-                transform: open ? 'rotate(180deg)' : 'rotate(0deg)',
-                transition: 'transform 0.2s'
-              }}
-            />
+            {!isSingleOption && (
+              <ExpandMore
+                fontSize="small"
+                sx={{
+                  transform: open ? 'rotate(180deg)' : 'rotate(0deg)',
+                  transition: 'transform 0.2s'
+                }}
+              />
+            )}
           </Box>
         }
-        onClick={handleOpen}
-        clickable
+        onClick={isSingleOption ? undefined : handleOpen}
+        clickable={!isSingleOption}
         color={open ? 'primary' : 'default'}
         size={size}
         sx={{
           boxShadow: open ? 2 : 0,
           transition: 'all 0.2s',
           '&:hover': {
-            boxShadow: 1
+            boxShadow: isSingleOption ? 0 : 1
           },
           ...otherProps.sx
         }}

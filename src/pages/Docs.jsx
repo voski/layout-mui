@@ -40,6 +40,7 @@ function Docs() {
   const [category, setCategory] = useState('design')
   const [status, setStatus] = useState('active')
   const [priority, setPriority] = useState('high')
+  const [singleValue, setSingleValue] = useState('only-option')
 
   const categoryOptions = [
     { value: 'design', label: 'Design' },
@@ -59,6 +60,10 @@ function Docs() {
     { value: 'medium', label: 'Medium Priority' },
     { value: 'high', label: 'High Priority' },
     { value: 'urgent', label: 'Urgent' }
+  ]
+
+  const singleOption = [
+    { value: 'only-option', label: 'Only Option' }
   ]
 
   const codeExample = (code) => (
@@ -517,10 +522,19 @@ const bottomElement = (
                     showPosition
                     size="small"
                   />
+                  <ChipSelect
+                    options={singleOption}
+                    value={singleValue}
+                    onChange={setSingleValue}
+                    showPosition
+                  />
                 </Box>
                 <Typography variant="caption" color="text.secondary" sx={{ mt: 2, display: 'block' }}>
                   Selected: Category={category}, Status={status}, Priority={priority}
                 </Typography>
+                <Alert severity="info" sx={{ mt: 2 }}>
+                  Notice: The last chip has only 1 option, so it&apos;s not clickable, shows no dropdown arrow, and ignores the position indicator.
+                </Alert>
               </Paper>
 
               {/* Features */}
